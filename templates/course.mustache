@@ -68,8 +68,6 @@
         {{/ theme_boost/drawer}}
     {{/haspreblocks}}
 
-
-
 <div id="page" data-region="mainpage" data-usertour="scroller" class="drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container">
 <div id="page-top"></div>
 <div class="wrapper-lambda">
@@ -81,15 +79,15 @@
     </div>
 
     {{#header_style_0}}
-	    {{>theme_lambda2/includes/header_style_0}}
+        {{>theme_lambda2/includes/header_style_0}}
     {{/header_style_0}}
 
     {{#header_style_1}}
-	    {{>theme_lambda2/includes/header_style_1}}
+        {{>theme_lambda2/includes/header_style_1}}
     {{/header_style_1}}
 
     {{#header_style_2}}
-	    {{>theme_lambda2/includes/header_style_2}}
+        {{>theme_lambda2/includes/header_style_2}}
     {{/header_style_2}}
     
     <div class="drawer-toggles d-flex">
@@ -100,11 +98,11 @@
                     data-toggler="drawers"
                     data-action="toggle"
                     data-target="theme_boost-drawers-courseindex"
-                    data-toggle="tooltip"
-                    data-placement="right"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
                     title="{{#str}}opendrawerindex, core{{/str}}"
                 >
-                    <span class="sr-only">{{#str}}opendrawerindex, core{{/str}}</span>
+                    <span class="visually-hidden">{{#str}}opendrawerindex, core{{/str}}</span>
                     {{#pix}} t/index_drawer, moodle {{/pix}}
                 </button>
             </div>
@@ -116,11 +114,11 @@
                     data-toggler="drawers"
                     data-action="toggle"
                     data-target="theme_boost-drawers-blocks"
-                    data-toggle="tooltip"
-                    data-placement="right"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="right"
                     title="{{#str}}opendrawerblocks, core{{/str}}"
                 >
-                    <span class="sr-only">{{#str}}opendrawerblocks, core{{/str}}</span>
+                    <span class="visually-hidden">{{#str}}opendrawerblocks, core{{/str}}</span>
                     <span class="dir-rtl-hide">{{#pix}}t/blocks_drawer, core{{/pix}}</span>
                     <span class="dir-ltr-hide">{{#pix}}t/blocks_drawer_rtl, core{{/pix}}</span>
                 </button>
@@ -133,7 +131,7 @@
     </div>
     
     <div id="page-content" class="row">
-        <div id="region-main-box" class="col-xs-12 col-12 px-0">
+        <div id="region-main-box" class="col-12 px-0">
             {{#secondarymoremenu}}
                 <div class="secondary-navigation">
                     {{> core/moremenu}}
