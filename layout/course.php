@@ -209,10 +209,12 @@ $editing = false;
 if ($PAGE->user_is_editing()) {$editing = true;}
 
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
+$maincontent = $OUTPUT->main_content();
 
 $templatecontext = [
     'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
     'output' => $OUTPUT,
+    'maincontent' => $maincontent,
     'datalambdacolormode' => get_user_preferences('lightdarkmode', 'light'),
     'lambdacolormode' => theme_lambda2_get_setting('dark_mode_switcher'),
     'sidepreblocks' => $blockspre,

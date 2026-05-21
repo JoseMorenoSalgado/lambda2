@@ -23,10 +23,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2026042150;
+$plugin->version   = 2026052150;
 $plugin->requires  = 2025041400;
 $plugin->component = 'theme_lambda2';
-$plugin->release = '2.4.06';
+$plugin->release = '2.4.08-moodle51-52-replace';
 $plugin->maturity = MATURITY_STABLE;
 $plugin->dependencies = [
     'theme_boost' => 2022041900
