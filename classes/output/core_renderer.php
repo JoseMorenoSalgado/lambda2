@@ -67,7 +67,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 				$headerloginoauth2 .= '<div class="lambda-oauth2"><h6 class="mb-0">'.get_string('potentialidps', 'auth').'</h6><div class="potentialidplist">';
 				foreach ($potentialidps as $idp) {
 					$headerloginoauth2 .= '<div class="potentialidp">';
-					$headerloginoauth2 .= '<a class="btn login-identityprovider-btn btn-block" href="'.$idp['url']->out().'" title="'.s($idp['name']).'">';
+					$headerloginoauth2 .= '<a class="btn login-identityprovider-btn w-100" href="'.$idp['url']->out().'" title="'.s($idp['name']).'">';
 					if (!empty($idp['iconurl'])) {
 						$headerloginoauth2 .= '<img src="'.s($idp['iconurl']).'" width="24" height="24" class="me-2"/>';
 					}
@@ -80,7 +80,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 			if (!empty($potentialidps)) {$headerloginoauth2 .= '</div>';}
 		}
 		
-		$lambdaloginform = '<form class="navbar-form pull-right" method="post" action="'.$wwwroot.'/login/index.php">
+		$lambdaloginform = '<form class="navbar-form float-end" method="post" action="'.$wwwroot.'/login/index.php">
 									<div id="block-login">
 										<div class="user-form">
 											<div id="user"><i class="lambda icon-person" aria-hidden="true"></i></div>
@@ -150,24 +150,24 @@ class core_renderer extends \theme_boost\output\core_renderer {
 					<div class="modal-content lambda-login">
 						<div class="modal-header">
 							<h5 class="modal-title">Login</h5>
-							<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<div class="modal-body">
 
 						<form class="login-form" action="'.$wwwroot.'/login/index.php" method="post">
 							<input type="hidden" name="logintoken" value="'.s(\core\session\manager::get_login_token()).'" />
-							<div class="login-form-username form-group">
-								<label for="username" class="sr-only">'.get_string('username').'</label>
+							<div class="login-form-username mb-3">
+								<label for="username" class="visually-hidden">'.get_string('username').'</label>
 								<input type="text" name="username" id="username" class="form-control form-control-lg" placeholder="'.get_string('username').'">
 							</div>
-							<div class="login-form-password form-group">
-								<label for="password" class="sr-only">'.get_string('password').'</label>
+							<div class="login-form-password mb-3">
+								<label for="password" class="visually-hidden">'.get_string('password').'</label>
 								<input type="password" name="password" id="password" value="" class="form-control form-control-lg" placeholder="'.get_string('password').'">
 							</div>
-							<div class="login-form-submit form-group">
+							<div class="login-form-submit mb-3">
 								<button class="btn btn-primary w-100 btn-lg my-2 mx-0" type="submit" id="loginbtn">'. get_string('login').'</button>
 							</div>
-							<div class="login-form-forgotpassword form-group">'.$lambda_login_link.'</div>
+							<div class="login-form-forgotpassword mb-3">'.$lambda_login_link.'</div>
 						</form>
 
 				</div>
@@ -454,7 +454,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
 		$siteurl = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http")."://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 
 		$coursename = format_string($PAGE->course->fullname, true);
-		if ($showfacebook || $showtwitter || $showwhatsapp || $showlinkedin || $showpinterest) {
+		if ($showfacebook || $showtwitterx || $showwhatsapp || $showlinkedin || $showpinterest) {
 			$sharebuttons .= '<ul class = "lambda-sharebuttons">';
 			if ($showfacebook) {
 				$sharebuttons .= '<li class="share-button facebook">';
@@ -924,13 +924,13 @@ class core_renderer extends \theme_boost\output\core_renderer {
 		<form autocomplete="off" action="'.$CFG->wwwroot.'/course/search.php" method="get" accept-charset="utf-8" class="mform simplesearchform pt-3">
 		<div class="input-group">
 			<label for="searchinput-aside">
-				<span class="sr-only">Search courses</span>
+				<span class="visually-hidden">Search courses</span>
 			</label>
 			<input type="text" id="searchinput-aside" class="form-control" placeholder="Search courses" aria-label="Search courses" name="search" data-region="input" autocomplete="off" value="">
-			<div class="input-group-append">
+			<div class="input-group-text p-0 border-0 bg-transparent">
 				<button type="submit" class="btn  btn-primary search-icon">
 					<i class="icon fa fa-search fa-fw " aria-hidden="true"></i>
-					<span class="sr-only">Search courses</span>
+					<span class="visually-hidden">Search courses</span>
 				</button>
 			</div>
 		</div>
