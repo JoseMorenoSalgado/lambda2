@@ -5,20 +5,13 @@
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
-//
-// Moodle is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Theme Lambda2 configuration.
  *
- * @package   block_lambdacb
+ * @package   theme_lambda2
  * @copyright 2025 redPIthemes
- *
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
@@ -32,123 +25,137 @@ $THEME->scss = function($theme) {
     return theme_lambda2_get_main_scss_content($theme);
 };
 
-if ($THEME->settings->footer_blocks_pos == 4) {$block_pos = array('side-pre', 'footer-left', 'footer-middle', 'footer-middle-2', 'footer-right');}
-else if ($THEME->settings->footer_blocks_pos == 3) {$block_pos = array('side-pre', 'footer-left', 'footer-middle', 'footer-right');}
-else if ($THEME->settings->footer_blocks_pos == 2) {$block_pos = array('side-pre', 'footer-left', 'footer-right');}
-else if ($THEME->settings->footer_blocks_pos == 1) {$block_pos = array('side-pre', 'footer-middle');}
-else {$block_pos = array('side-pre');}
+$footerblockspos = isset($THEME->settings->footer_blocks_pos) ? (int)$THEME->settings->footer_blocks_pos : 0;
 
-$add_block_pos = $block_pos;
-array_push($add_block_pos, 'main-top', 'main-bottom');
-$fp_block_pos = $add_block_pos;
-array_push($fp_block_pos, 'admin-only');
+$blockregions = ['side-pre'];
+if ($footerblockspos === 1) {
+    $blockregions = ['side-pre', 'footer-middle'];
+} else if ($footerblockspos === 2) {
+    $blockregions = ['side-pre', 'footer-left', 'footer-right'];
+} else if ($footerblockspos === 3) {
+    $blockregions = ['side-pre', 'footer-left', 'footer-middle', 'footer-right'];
+} else if ($footerblockspos === 4) {
+    $blockregions = ['side-pre', 'footer-left', 'footer-middle', 'footer-middle-2', 'footer-right'];
+}
 
-$footerscripts = array('scripts');
-if ($THEME->settings->bs4converter) {array_push($footerscripts, 'bsconvert');}
+$courseblockregions = $blockregions;
+$courseblockregions[] = 'main-top';
+$courseblockregions[] = 'main-bottom';
+
+$frontpageblockregions = $courseblockregions;
+$frontpageblockregions[] = 'admin-only';
+
+$footerscripts = ['scripts'];
+if (!empty($THEME->settings->bs4converter)) {
+    $footerscripts[] = 'bsconvert';
+}
 
 $THEME->layouts = [
-    'base' => array(
+    'base' => [
         'file' => 'default.php',
-        'regions' => array(),
-    ),
-    'standard' => array(
+        'regions' => [],
+    ],
+    'standard' => [
         'file' => 'default.php',
-        'regions' => $block_pos,
+        'regions' => $blockregions,
         'defaultregion' => 'side-pre',
-    ),
-    'course' => array(
+    ],
+    'course' => [
         'file' => 'course.php',
-        'regions' => $add_block_pos,
+        'regions' => $courseblockregions,
         'defaultregion' => 'side-pre',
-    ),
-    'incourse' => array(
+    ],
+    'incourse' => [
         'file' => 'incourse.php',
-        'regions' => $add_block_pos,
+        'regions' => $courseblockregions,
         'defaultregion' => 'side-pre',
-    ),
-    'frontpage' => array(
+    ],
+    'frontpage' => [
         'file' => 'frontpage.php',
-        'regions' => $fp_block_pos,
+        'regions' => $frontpageblockregions,
         'defaultregion' => 'side-pre',
-    ),
-    'admin' => array(
+    ],
+    'admin' => [
         'file' => 'default.php',
-        'regions' => $block_pos,
+        'regions' => $blockregions,
         'defaultregion' => 'side-pre',
-    ),
-    'coursecategory' => array(
+    ],
+    'coursecategory' => [
         'file' => 'coursecategory.php',
-        'regions' => $block_pos,
+        'regions' => $blockregions,
         'defaultregion' => 'side-pre',
-    ),
-    'mydashboard' => array(
+    ],
+    'mydashboard' => [
         'file' => 'dashboard.php',
-        'regions' => $block_pos,
+        'regions' => $blockregions,
         'defaultregion' => 'side-pre',
-    ),
-    'mycourses' => array(
+    ],
+    'mycourses' => [
         'file' => 'dashboard.php',
-        'regions' => $block_pos,
+        'regions' => $blockregions,
         'defaultregion' => 'side-pre',
-    ),
-    'mypublic' => array(
+    ],
+    'mypublic' => [
         'file' => 'default.php',
-        'regions' => $block_pos,
+        'regions' => $blockregions,
         'defaultregion' => 'side-pre',
-    ),
-    'login' => array(
+    ],
+    'login' => [
         'file' => 'login.php',
-        'regions' => array(),
-        'options' => array('langmenu' => true),
-    ),
-    'report' => array(
+        'regions' => [],
+        'options' => ['langmenu' => true],
+    ],
+    'report' => [
         'file' => 'default.php',
-        'regions' => $block_pos,
+        'regions' => $blockregions,
         'defaultregion' => 'side-pre',
-    ),
-    'popup' => array(
+    ],
+    'popup' => [
         'file' => 'default.php',
-        'regions' => array(),
-        'options' => array('nofooter' => true, 'nonavbar' => true),
-    ),
-    'frametop' => array(
+        'regions' => [],
+        'options' => ['nofooter' => true, 'nonavbar' => true],
+    ],
+    'frametop' => [
         'file' => 'default.php',
-        'regions' => array(),
-        'options' => array('nofooter' => true, 'nocoursefooter' => true),
-    ),
-    'embedded' => array(
+        'regions' => [],
+        'options' => ['nofooter' => true, 'nocoursefooter' => true],
+    ],
+    'embedded' => [
         'file' => 'embedded.php',
-        'regions' => array('side-pre'),
+        'regions' => ['side-pre'],
         'defaultregion' => 'side-pre',
-    ),
-    'maintenance' => array(
+    ],
+    'maintenance' => [
         'file' => 'maintenance.php',
-        'regions' => array(),
-    ),
-    'print' => array(
+        'regions' => [],
+    ],
+    'print' => [
         'file' => 'default.php',
-        'regions' => array(),
-        'options' => array('nofooter' => true, 'nonavbar' => false),
-    ),
-    'redirect' => array(
+        'regions' => [],
+        'options' => ['nofooter' => true, 'nonavbar' => false],
+    ],
+    'redirect' => [
         'file' => 'embedded.php',
-        'regions' => array(),
-    ),
-    'secure' => array(
+        'regions' => [],
+    ],
+    'secure' => [
         'file' => 'secure.php',
-        'regions' => array('side-pre'),
-        'defaultregion' => 'side-pre'
-    )
+        'regions' => ['side-pre'],
+        'defaultregion' => 'side-pre',
+    ],
 ];
+
 $THEME->iconsystem = \core\output\icon_system::FONTAWESOME;
-$THEME->javascripts = array('theme-uikit');
+$THEME->javascripts = ['theme-uikit'];
 $THEME->javascripts_footer = $footerscripts;
 $THEME->enable_dock = false;
 $THEME->prescsscallback = 'theme_lambda2_get_pre_scss';
 $THEME->extrascsscallback = 'theme_lambda2_get_extra_scss';
-$THEME->yuicssmodules = array();
+$THEME->yuicssmodules = [];
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
-$THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
+if (defined('BLOCK_ADDBLOCK_POSITION_FLATNAV')) {
+    $THEME->addblockposition = BLOCK_ADDBLOCK_POSITION_FLATNAV;
+}
 $THEME->requiredblocks = '';
 $THEME->haseditswitch = true;
 $THEME->usescourseindex = true;
