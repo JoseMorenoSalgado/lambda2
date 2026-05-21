@@ -17,12 +17,13 @@
 defined('MOODLE_INTERNAL') || die();
 
 require_once(__DIR__ . '/lib.php');
+require_once(__DIR__ . '/lib_moodle52.php');
 
 $THEME->name = 'lambda2';
 $THEME->parents = ['boost'];
 $THEME->editor_sheets = ['editor'];
 $THEME->scss = function($theme) {
-    return theme_lambda2_get_main_scss_content($theme);
+    return theme_lambda2_get_main_scss_content_moodle52($theme);
 };
 
 $footerblockspos = isset($THEME->settings->footer_blocks_pos) ? (int)$THEME->settings->footer_blocks_pos : 0;
