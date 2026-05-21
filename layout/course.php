@@ -84,20 +84,28 @@ $headercontent = $header->export_for_template($renderer);
 $extraclasses = [];
 $extraclasses[] = 'lambda';
 $extraclasses[] = theme_lambda2_get_moodle_version();
-if (theme_lambda2_get_setting('use_linearicons')) {$extraclasses[] = 'iconset-lnr';}
+if (theme_lambda2_get_setting('use_linearicons')) {
+    $extraclasses[] = 'iconset-lnr';
+}
 
 $pagewidth = theme_lambda2_get_setting('page_layout');
-if ($pagewidth == 0) {$extraclasses[] = 'layout-full';}
-if ($pagewidth == 1) {$extraclasses[] = 'layout-boxed';}
+if ($pagewidth == 0) {
+    $extraclasses[] = 'layout-full';
+}
+if ($pagewidth == 1) {
+    $extraclasses[] = 'layout-boxed';
+}
 
 $blockstyle = theme_lambda2_get_setting('block_style');
-$extraclasses[] = 'blockstyle-'.$blockstyle;
+$extraclasses[] = 'blockstyle-' . $blockstyle;
 
 $pageheaderstyle = theme_lambda2_get_setting('page_header');
-$extraclasses[] = 'page-header-style-'.$pageheaderstyle;
+$extraclasses[] = 'page-header-style-' . $pageheaderstyle;
 
 $drawerstyle = theme_lambda2_get_setting('drawers_style');
-if ($drawerstyle == 1) {$extraclasses[] = 'drawers_dark';}
+if ($drawerstyle == 1) {
+    $extraclasses[] = 'drawers_dark';
+}
 
 $blockspre = $OUTPUT->blocks('side-pre');
 $hassidepre = $PAGE->blocks->region_has_content('side-pre', $OUTPUT);
@@ -110,11 +118,23 @@ $header_style_0 = true;
 $header_style_1 = false;
 $header_style_2 = false;
 $headerstyle = theme_lambda2_get_setting('header_style');
-if ($headerstyle == 0) {$extraclasses[] = 'header-style-0';}
-if ($headerstyle == 1) {$header_style_0 = false; $header_style_1 = true; $extraclasses[] = 'header-style-1';}
-if ($headerstyle >= 2) {$header_style_0 = false; $header_style_2 = true; $extraclasses[] = 'header-style-2';}
-if ($headerstyle == 3) {$extraclasses[] = 'header-float';}
-                
+if ($headerstyle == 0) {
+    $extraclasses[] = 'header-style-0';
+}
+if ($headerstyle == 1) {
+    $header_style_0 = false;
+    $header_style_1 = true;
+    $extraclasses[] = 'header-style-1';
+}
+if ($headerstyle >= 2) {
+    $header_style_0 = false;
+    $header_style_2 = true;
+    $extraclasses[] = 'header-style-2';
+}
+if ($headerstyle == 3) {
+    $extraclasses[] = 'header-float';
+}
+
 $headeruserpic = '';
 $imgheight = '80';
 $logoheight = theme_lambda2_get_setting('logo_height');
@@ -122,20 +142,22 @@ if (($logoheight == '60px') || ($logoheight == '75px')) {
     $imgheight = $logoheight;
     $imgheight = substr($imgheight, 0, -2);
 }
-if (isloggedin()) {$headeruserpic = $OUTPUT->user_picture($USER, array('size' => $imgheight, 'class' => 'welcome_userpicture'));}
+if (isloggedin()) {
+    $headeruserpic = $OUTPUT->user_picture($USER, ['size' => $imgheight, 'class' => 'welcome_userpicture']);
+}
 
 $shownavbarsearch = true;
 if (theme_lambda2_get_setting('navbar_search_form') == 2) {
     $shownavbarsearch = false;
 }
-if ((!isloggedin() or isguestuser()) && (theme_lambda2_get_setting('navbar_search_form') == 1)) {
+if ((!isloggedin() || isguestuser()) && (theme_lambda2_get_setting('navbar_search_form') == 1)) {
     $shownavbarsearch = false;
 }
 
 if (theme_lambda2_get_setting('nav_breadcrumb') == 2) {
     $extraclasses[] = 'no-breadcrumb';
 }
-if ((!isloggedin() or isguestuser()) && (theme_lambda2_get_setting('nav_breadcrumb') == 1)) {
+if ((!isloggedin() || isguestuser()) && (theme_lambda2_get_setting('nav_breadcrumb') == 1)) {
     $extraclasses[] = 'no-breadcrumb';
 }
 
@@ -150,7 +172,9 @@ $blocksfootermiddle2 = '';
 $blocksfooterright = '';
 
 $footer_blocks_pos = theme_lambda2_get_setting('footer_blocks_pos');
-if ($footer_blocks_pos != 0) {$hasfooterblockregion = true;}
+if ($footer_blocks_pos != 0) {
+    $hasfooterblockregion = true;
+}
 if ($footer_blocks_pos == 1) {
     $blocksfootermiddle = $OUTPUT->blocks('footer-middle');
     $has1footerblockcolumns = true;
@@ -176,7 +200,7 @@ if ($footer_blocks_pos == 4) {
 
 $hasfootnote = false;
 $footnote = '';
-if (theme_lambda2_get_setting('footnote', true) == true) { 
+if (theme_lambda2_get_setting('footnote', true) == true) {
     $footnote = format_text(theme_lambda2_get_setting('footnote'), FORMAT_HTML, ['noclean' => true]);
     $hasfootnote = true;
 }
@@ -195,24 +219,37 @@ if (theme_lambda2_get_setting('socials_position') == 2) {
     $socialsheader = true;
 }
 for ($i = 1; $i <= 5; $i++) {
-    if (!empty(theme_lambda2_get_setting('socials_icontypes_'.$i))) {$hassocials = true; break;} 
+    if (!empty(theme_lambda2_get_setting('socials_icontypes_' . $i))) {
+        $hassocials = true;
+        break;
+    }
 }
 if (!$hassocials) {
     for ($i = 1; $i <= 3; $i++) {
-        if (!empty(theme_lambda2_get_setting('socials_link_icon_'.$i))) {$hassocials = true; break;} 
+        if (!empty(theme_lambda2_get_setting('socials_link_icon_' . $i))) {
+            $hassocials = true;
+            break;
+        }
     }
 }
 
 $logged_in = true;
-if (!isloggedin() or isguestuser()) {$logged_in = false;}
+if (!isloggedin() || isguestuser()) {
+    $logged_in = false;
+}
 $editing = false;
-if ($PAGE->user_is_editing()) {$editing = true;}
+if ($PAGE->user_is_editing()) {
+    $editing = true;
+}
 
 $bodyattributes = $OUTPUT->body_attributes($extraclasses);
-$maincontent = $OUTPUT->main_content();
+
+ob_start();
+echo $OUTPUT->main_content();
+$maincontent = ob_get_clean();
 
 $templatecontext = [
-    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), "escape" => false]),
+    'sitename' => format_string($SITE->shortname, true, ['context' => context_course::instance(SITEID), 'escape' => false]),
     'output' => $OUTPUT,
     'maincontent' => $maincontent,
     'datalambdacolormode' => get_user_preferences('lightdarkmode', 'light'),
@@ -221,7 +258,7 @@ $templatecontext = [
     'haspreblocks' => $haspreblocks,
     'maintopblocks' => $blockstop,
     'hasmaintopblocks' => $hasmaintop,
-	'mainbottomblocks' => $blocksbottom,
+    'mainbottomblocks' => $blocksbottom,
     'hasmainbottomblocks' => $hasmainbottom,
     'bodyattributes' => $bodyattributes,
     'courseindexopen' => $courseindexopen,
@@ -246,7 +283,7 @@ $templatecontext = [
     'has4footerblockcolumns' => $has4footerblockcolumns,
     'has3footerblockcolumns' => $has3footerblockcolumns,
     'has2footerblockcolumns' => $has2footerblockcolumns,
-    'has1footerblockcolumns' => $has1footerblockcolumns,	
+    'has1footerblockcolumns' => $has1footerblockcolumns,
     'hasfootnote' => $hasfootnote,
     'footnote' => $footnote,
     'socialsheader' => $socialsheader,
