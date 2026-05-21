@@ -1,0 +1,594 @@
+/*------------------------------------
+User menu
+------------------------------------*/
+#lightdarkmode-toggle {
+    display: flex;
+    justify-content: space-between;
+}
+#lightdarkmode-toggle .light-mode-icon, #lightdarkmode-toggle .dark-mode-icon {
+    margin-right: .2rem;
+    display: flex;
+    align-self: center;
+}
+[data-lambda-color-mode="light"] #lightdarkmode-toggle .light-mode-icon {
+    display: none;
+}
+[data-lambda-color-mode="dark"] #lightdarkmode-toggle .dark-mode-icon {
+    display: none;
+}
+
+/*------------------------------------
+Color mode style
+------------------------------------*/
+/* General */
+.lambda {
+    transition: color 0.3s;
+    h1, h2, h3, h4, h5, h6 {
+        transition: color 0.3s;
+    }
+    #page-content, #region-main, .secondary-navigation .navigation ul, #region-main .card, .lambda-nav.style-2.fixed-top, .lambda-nav.style-2 .more-nav>li.nav-item>a.nav-link {
+        transition: background-color 0.3s;
+    }
+    #main-header {
+        transition: background-color 0.3s;
+    }
+    .drawer {
+        transition: background-color 0.3s;
+    }
+    #page-footer {
+        transition: background-color 0.3s, color 0.3s;
+    }
+    #page-footer .footer-bottom {
+        transition: background-color 0.3s, color 0.3s;
+    }
+    #page {
+        transition: background-color 0.3s;
+    }
+}
+
+[data-lambda-color-mode="dark"] .lambda {
+    /* Typography */
+    color: $dark_mode_body_color !important;
+    input, button, select, textarea, .card, .form-item .form-text {
+        color: $dark_mode_body_color;
+    }
+    h1, h2, h3, h4, h5, h6, #adminsettings h3.main {
+        color: $dark_mode_heading_color !important;
+    }
+    #adminsettings h3.main {
+        border-bottom: 1px solid rgba(200, 212, 224, .15);
+    }
+    #adminsettings h3.lambda-toggle.open {
+        color: #fff !important;
+    }
+    a, .course-content ul.topics li.section .sectionname a, .course-content ul.weeks li.section .sectionname a {
+        color: $dark_mode_link_color;
+    }
+    a:hover, a:focus, .dropdown-menu a:hover, .course-content ul.topics li.section .sectionname a:hover, .course-content ul.weeks li.section .sectionname a:hover {
+        color: #fefefe !important;
+    }
+    .btn.btn-primary, .btn.btn-secondary, .btn.btn-success, .btn.btn-info, .btn.btn-warning, .btn.btn-danger, .btn.btn-dark {
+        color: #fff;
+    }
+    .activity-instance .activityname a, .dropdown-menu a {
+        color: $dark_mode_link_color !important;
+    }
+    #user-action-menu.dropdown-menu div:not(.submenu) .dropdown-item:last-child::before {
+        color: inherit;
+    }
+    .nav.nav-tabs .nav-link, .lambda-nav.style-2 a.nav-link, .lambda-nav.style-2 .editmode-switch-form label, .lambda-nav.style-2 .lambda-search-bar #navbarsearchbox, .lambda-nav.style-2 .lambda-search-bar i.lambda, .lambda-nav.style-2 .popover-region-toggle i.icon.fa, #user-menu-toggle, .lambda-nav.style-2 .dropdown-toggle::after, .drawer-toggles .drawer-toggler .btn .icon, .header-style-2 #user-menu-toggle {
+        color: $dark_mode_body_color !important;
+    }
+    .lambda-nav.style-2 .dropdown-menu .dropdown-toggle::after {
+        color: $dark_mode_link_color !important;
+    }
+    .lambda-nav.style-2 .dropdown-menu .dropdown-toggle:active::after, .lambda-nav.style-2 .dropdown-menu .dropdown-toggle:focus::after, .lambda-nav.style-2 .dropdown-menu .dropdown-toggle:focus-within::after {
+        color: #fff !important;
+    }
+    .lambda-nav.style-2 button.mobile-menu-toggle {
+        background-color: rgba(200, 212, 224, .15);
+        border-color: rgba(200, 212, 224, .15) !important;
+    }
+    .moremenu .dropdownmoremenu>.dropdown-menu .dropdown-menu .dropdown-item {
+        background-color: #f8f9fa18;
+    }
+    .text-muted {
+        color: $dark_mode_body_color !important;
+        opacity: .65;
+    }
+    .form-filetypes-descriptions ul li small {
+        color: #aaa !important;
+    }
+
+    /* Header */
+    #main-header.style-0, #main-header.style-1 {
+        background: $dark_mode_headerbgcolor;
+        padding: 0;
+    }
+    #main-header.style-0 .profileblock .popover-region-toggle i.icon.fa, #main-header.style-1 .profileblock .popover-region-toggle i.icon.fa {
+        background: #5f6870;
+        color: #fefefe !important;
+    }
+    #main-header.style-0 .profileblock .usermenu #user-menu-toggle, #main-header.style-1 .profileblock .usermenu #user-menu-toggle {
+        color: #fefefe;
+    }
+    .lambda-nav.style-0, .lambda-nav.style-1 {
+        background: rgba($dark_mode_headerbgcolor, .3);
+    }
+    .lambda-nav.style-0 .more-nav>li.nav-item>a.nav-link, .lambda-nav.style-1 .more-nav>li.nav-item>a.nav-link, .lambda-nav.style-0 .lambda-search-bar, .lambda-nav.style-1 .lambda-search-bar {
+        background-color: transparent !important;
+    }
+    .lambda-nav.style-2 {
+        box-shadow: 0 .375rem 1.5rem 0 rgba(40, 12, 14, .33);
+    }
+    .lambda-nav.style-2.fixed-top, .lambda-nav.style-2 .more-nav>li.nav-item>a.nav-link {
+        background-color: $dark_mode_headerbgcolor !important;
+    }
+
+    /* Main region */
+    .mform fieldset, .nav.nav-tabs:before {
+        border-color: #c3c7cb33;
+    }
+    .form-control {
+        background-color: transparent;
+        border-color: #c3c7cb44;
+        color: #fefefe;
+    }
+    fieldset input[type="checkbox"] {
+        opacity: .25;
+    }
+    fieldset input[type="checkbox"]:checked {
+        opacity: 1;
+    }
+    .custom-select {
+        background-color: rgba(205, 255, 255, .15);
+        border-color: #c3c7cb33;
+        color: #fefefe;
+    }
+    .custom-select {
+        background-image: url([[pix:theme|color-mode/caret-down-fill]]);
+        background-repeat: no-repeat;
+    }
+    ul.dropdown-menu.show, .form-autocomplete-suggestions {
+        background: #16191e !important;
+    }
+    select.form-select {
+        background-color: rgba(200, 210, 240, .15);
+        border-color: rgba(222, 226, 230, .2);
+    }
+    .form-autocomplete-selection .badge {
+        background-color: #032830 !important;
+        border: 1px solid #087990;
+    }
+    .quickediticon.visibleifjs .icon.fa {
+        color: #ddd;
+    }
+    .form-autocomplete-downarrow {
+        color: #ddd;
+    }
+    .filemanager.fm-noitems .fm-empty-container, .filepicker-filelist .filepicker-container, .dropzone-container .dropzone {
+        color: #87a8c5;
+        border-color: #568bb9cc;
+        background-color: #eff3fe22;
+    }
+    .filepicker-filelist .dndupload-target, .filemanager-container .dndupload-target {
+        background: #242323;
+    }
+    .filemanager i.fa-arrow-circle-o-down:before, .filepicker-filelist i.fa-arrow-circle-o-down:before, .dropzone-container .dropzone-icon .icon.fa-cloud-upload:before {
+        color: #87a8c5;
+    }
+    .filemanager .fp-content {
+        border: 2px dashed #ced4da22;
+        background-color: #fbfbfb11;
+    }
+    .filemanager .fp-toolbar .fp-btn-add a[title]:after, .filemanager .fp-toolbar .fp-btn-download a[title]:after {
+        color: #d3d7e3;
+    }
+    .filemanager .btn.btn-secondary:not(.checked) i {
+        color: #eee;
+    }
+    table.generaltable {
+        background-color: transparent;
+    }
+    table.generaltable thead th, table.generaltable thead td, .gradeparent .gradereport-grader-table thead th, .gradeparent .gradereport-grader-table thead td {
+        background-color: #e9eef333;
+        border-color: #cdd2d633;
+        color: $dark_mode_heading_color;
+    }
+    table.generaltable thead .sticky-column, .generaltable tbody tr:nth-of-type(even) {
+        background-color: #ffffff11;
+    }
+    table.generaltable tbody th, table.generaltable tbody td, .gradeparent .gradereport-grader-table tbody th, .gradeparent .gradereport-grader-table tbody td {
+        background-color: transparent;
+        color: $dark_mode_body_color;
+        border-color: #cdd2d633;
+    }
+    .list-group-item {
+        background-color: transparent;
+        border: 1px solid rgba(200, 210, 225, .15);
+    }
+    .gradeparent .gradereport-grader-table, .gradeparent .gradereport-grader-table .cell {
+        border-color: #dee2e633;
+    }
+    .gradeparent .gradereport-grader-table .userrow.odd .cell {
+        background-color: #374245;
+    }
+    .gradeparent .gradereport-grader-table img.icon.itemicon, .activity_level img.icon.iconlarge, h2 img.icon.icon.iconlarge {
+        filter: invert(.85);
+    }
+    .gradeparent .gradereport-grader-table tr.avg {
+        background-color: $dark_mode_page_bg_color;
+    }
+    .include_setting.activity_level img.icon {
+        filter: invert(1);
+    }
+    #plugins-control-panel .pluginname .componentname, #plugins-control-panel .version .versionnumber, #plugins-control-panel .notes .requiredby {
+        color: $dark_mode_body_color !important;
+        opacity: .8;
+    }
+    .header-action>.simplesearchform {
+        background: rgb(213, 233, 251, .1);
+    }
+    .btn.btn-icon.icons-collapse-expand, .action-menu .btn.dropdown-toggle {
+        background-color: #dee2e628 !important;
+        color: #ddd !important;
+    }
+    .btn.btn-outline-secondary.dropdown-toggle, .maincalendar .calendarmonth td, .maincalendar .calendarmonth th {
+        border-color: #c3c7cb33;
+    }
+    .userinitials, .searchcontainer .btn.btn-clear, .simplesearchform .input-group .btn.search-icon, .simplesearchform .input-group .btn.btn-clear, .user-search .usersearchwidget .btn.btn-clear {
+        background-color: rgba(205, 255, 255, .25) !important;
+        color: #d3d7e3 !important;
+    }
+    .drawer-toggles .drawer-toggler .btn {
+        background: #5f6870;
+    }
+    [data-region="completion-info"] .badge.badge-light, .path-mod .automatic-completion-conditions .badge.badge-light, .path-mod .automatic-completion-conditions .badge.bg-light.text-dark {
+        background-color: #99999977 !important;
+        color: #fefefe !important;
+    }
+    .path-mod #page-content .activity-header .completion-info, .description .course-description-item:not(.activity-altcontent) {
+        background-color: #f3f5f922;
+        border-color: #dee2e622;
+    }
+    .activity-information .btn.btn-outline-secondary, .block .block-cards a.coursename {
+        color: #fefefe !important;
+    }
+    .activity-item .activity-dates {
+        color: rgba($dark_mode_body_color, .75);
+    }
+    .activity-grid .activity-completion .completion-dropdown button.btn:not(.btn-success):not(.btn-danger), .activity-grid .activity-completion .completion-dropdown a[role="button"].btn:not(.btn-success):not(.btn-danger) {
+        background-color: rgb(205 255 255 / .25) !important;
+        color: #d3d7e3 !important;
+    }
+    .pagination li.page-item .page-link {
+        border: solid 1px #d7d7d733;
+        color: #ddd;
+        background-color: rgba(205, 255, 255, .15);
+    }
+    .modulename > img.icon {
+        filter: invert(1);
+    }
+    .btn.btn-link.block-add {
+        background-color: #032830 !important;
+        color: #6edff6 !important;
+        border-color: #087990;
+    }
+    .btn.btn-link.block-add:hover {
+        background-color: #033540  !important;
+    }
+    .btn.btn-link.activity-add {
+        background-color: #051b11 !important;
+        border-color: #0f5132 !important;
+        color: #75b798 !important;
+    }
+    .btn.btn-link.activity-add:hover {
+        background-color: #082618 !important; 
+    }
+    .coursebox .content h3.coursename a, .coursebox .content h3.coursename a:hover, .course_category_tree .category.with_children h3.categoryname a, .course_category_tree .category.notloaded h3.categoryname a, .course_category_tree .category>.info>.categoryname a {
+        color: #eee;
+    }
+    .coursebox.list.clearfix, .course_category_tree .subcategories, .course_category_tree .subcategories .info>.categoryname {
+        border-color: #dddddd33 !important;
+    }
+    .course_category_tree .subcategories .info>.categoryname:before {
+        color: #708090;
+    }
+    .course_category_tree .subcategories .categoryname .numberofcourse {
+        background-color: #708090;
+        color: #eee;
+    }
+    .block_myoverview .whitebutton .btn-secondary {
+        background: #ffffff33;
+    }
+    .accordion.lambda.style-01 .card .collapse.show {
+        background: #f8f8f811;
+        border-top: 1px solid rgb(0 0 0 / .075);
+    }
+    .accordion.lambda.style-01 .card .card-header .btn-header-link[aria-expanded="true"] {
+        background: $maincolor;
+        color: #fff;
+    }
+
+    /* text editors */
+    .tox.tox-tinymce {
+        border: 2px solid #2b2b2b !important;
+    }
+    .tox .tox-mbtn {
+        background: transparent !important;
+        color: #fff !important;
+    }
+    .tox .tox-menubar, .tox .tox-toolbar, .tox .tox-toolbar__primary, .tox .tox-toolbar__overflow, .tox .tox-toolbar-overlord, .tox .tox-anchorbar {
+        background-color: transparent !important;
+    }
+    .tox .tox-editor-header {
+        background-color: #0e0e11 !important;
+        border-bottom: 1px solid rgba(var(--bs-white-rgb, 255, 255, 255), 0.15) !important;
+    }
+    .tox .tox-tbtn {
+        background-color: #1e1e25 !important;
+    }
+    .tox .tox-tbtn.tox .tox-tbtn:hover {
+        background: #495057;
+    }
+    .tox .tox-tbtn svg {
+        fill: #000 !important;
+        filter: invert(1) !important;
+    }
+    .tox .tox-tbtn--disabled {
+        background-color: #495057 !important;
+    }
+    .tox .tox-tbtn--disabled svg {
+        filter: invert(1) !important;
+    }
+    .tox .tox-statusbar {
+        background-color: #495057 !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
+    }
+    .tox .tox-statusbar, .tox .tox-statusbar * {
+        color: rgba(255, 255, 255, 0.75) !important;
+    }
+    .tox .tox-menu {
+        background-color: #495057;
+        border: 1px solid transparent;
+    }
+    .tox .tox-menu, .tox .tox-menu * {
+        color: #e9ecef !important;
+    }
+    .tox .tox-menu svg {
+        fill: #000 !important;
+        filter: invert(1) !important;
+    }
+    .tox .tox-menu .tox-collection__item--active {
+        background-color: #0e0e11;
+    }
+    .tox .tox-menu .tox-collection__item--enabled {
+        background-color: rgba(255, 255, 255, 0.22) !important;
+    }
+    .tox .tox-pop.tox-pop--top::after {
+        border-color: transparent transparent #495057 transparent;
+    }
+    .tox .tox-pop__dialog {
+        background-color: #495057;
+    }
+    .tox .tox-pop__dialog .tox-tbtn__select-label {
+        color: #e9ecef !important;
+    }
+    .tox .tox-sidebar-wrap {
+        position: relative;
+    }
+    .tox .tox-editor-container .tox-sidebar-wrap:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(90, 70, 100, .3);
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+    textarea.tiny_equation_equation {
+        background: #666368;
+    }
+    .editor_atto_wrap .editor_atto_toolbar {
+        background: #ecf0f533;
+        border-color: #ced4da33;
+    }
+    .editor_atto_wrap .editor_atto_toolbar div.atto_group {
+        background-color: #ddd;
+    }
+    .editor_atto_wrap .editor_atto_content_wrap {
+        background-color: rgba(205, 255, 255, .15);
+    }
+    .editor_atto_notification .atto_info {
+        background-color: rgba(0, 0, 0, .75);
+    }
+
+    /* Footer */
+    #page-footer {
+        background-color: $dark_mode_footerbgcolor !important;
+        color: $dark_mode_footertxtcolor !important;
+    }
+    #page-footer .footer-bottom {
+        background-color: $dark_mode_fcpbgcolor !important;
+        color: $dark_mode_footertxtcolor !important;
+    }
+
+    /* Blocks */
+    .block.block_timeline [data-region="no-courses-empty-message"] img, .block.block_timeline [data-region="no-events-empty-message"] img, .block.block_myoverview [data-region="empty-message"] > img {
+        filter: invert(.75);
+    }
+    .block.block_myoverview .block-cards .course-info-container {
+        background-color: rgba(205, 255, 255, .15);
+    }
+    .block-myoverview.block-cards .card .card-footer.menu.bg-white {
+        background-color: transparent !important;
+    }
+    .block .block-cards span.categoryname {
+        color: #fff !important;
+    }
+    .maincalendar .calendarmonth .clickable:hover {
+        background-color: rgba($maincolor, .33);
+    }
+
+    /* Bootstrap */
+    .btn a {
+        color: #fff;
+    }
+    .badge.bg-secondary.text-dark, .bd-callout.callout-secondary, .alert.alert-secondary {
+        background-color: #161719 !important;
+        border: 1px solid #41464b !important;
+        color: #a7acb1 !important;
+    }
+    .badge.badge-info, .badge.bg-info, .bd-callout.callout-info, .alert.alert-info {
+        background-color: #032830 !important;
+        border: 1px solid #087990 !important;
+        color: #6edff6 !important;
+    }
+    .badge.badge-warning, .bd-callout.callout-warning, .alert.alert-warning {
+        background-color: #332701 !important;
+        border: 1px solid #997404 !important;
+        color: #ffda6a !important;
+    }
+    .badge.badge-danger, .badge.bg-danger, .bd-callout.callout-danger, .alert.alert-danger {
+        background-color: #2c0b0e !important;
+        border: 1px solid #842029 !important;
+        color: #ea868f !important;
+    }
+    .badge.badge-success, .badge.bg-success, .bd-callout.callout-success, .alert.alert-success {
+        background-color: #051b11 !important;
+        border: 1px solid #0f5132 !important;
+        color: #75b798 !important;
+    }
+    .alert button.close {
+        color: inherit;
+    }
+    .border {
+        border-color: #dee2e622 !important;
+    }
+    .border-right {
+        border-right-color: #dee2e622 !important;
+    }
+    .border-left {
+        border-left-color: #dee2e622 !important;
+    }
+    .border-top {
+        border-top-color: #dee2e622 !important;
+    }
+    .border-bottom, #region-main .simplesearchform .input-group, .course-content ul.topics li.activity:not(.modtype_label), .course-content ul.weeks li.activity:not(.modtype_label), .course-content ul.topics .course-section-header, .course-content ul.weeks .course-section-header {
+        border-bottom-color: #dee2e622 !important;
+    }
+    .bg-light {
+        background-color: #f8f9fa22 !important;
+    }
+    .bg-white {
+        background-color: $dark_mode_page_bg_color !important;
+    }
+    .dropdown-divider {
+        border-top: 1px solid #e9ecef22;
+    }
+
+    /* plugins */
+    .format-tiles .course-content ul.tiles .tile {
+        background-color: transparent;
+        box-shadow: 2px 4px 5px 0 #bdbdbd15;
+    }
+    .format-tiles .course-content ul li.section.main {
+        background-color: #ffffff18;
+    }
+    .format-tiles .course-content ul li.activity:not(.modtype_label) {
+        border-bottom: 1px solid #eeeeee33;
+    }
+
+}
+
+/* Full width layout */
+[data-lambda-color-mode="dark"] .lambda.layout-full {
+    #page {
+        background-color: $dark_mode_page_bg_color !important;
+    }
+    #page-content {
+        background-color: rgba(8, 13, 20, .2);
+    }
+    #region-main, .secondary-navigation .navigation ul, #region-main .card, .secondary-navigation .navigation, .uk-card-default, .coursebox.grid .summary .info {
+        background-color: transparent !important        
+    }
+}
+
+/* Boxed layout */
+[data-lambda-color-mode="dark"] .lambda.layout-boxed {
+    background-color: $dark_mode_page_bg_color;
+    .wrapper-lambda {
+        background-color: rgba(8, 13, 20, .2);
+    }
+    #page-content, #region-main, .secondary-navigation .navigation ul, #region-main .card, .secondary-navigation .navigation, .uk-card-default, .coursebox.grid .summary .info {
+        background-color: transparent !important        
+    }
+}
+
+/* further adjustments */
+[data-lambda-color-mode="dark"] #page-admin-index .alert.alert-secondary.alert-block {
+    background-color: #f0f8ffbb !important;
+}
+[data-lambda-color-mode="dark"] select > optgroup, [data-lambda-color-mode="dark"] select > option, [data-lambda-color-mode="dark"] select > optgroup > option, [data-lambda-color-mode="dark"] .modal-content, [data-lambda-color-mode="dark"] .modal-content .modal-body, [data-lambda-color-mode="dark"] .modal-content .modal-footer, [data-lambda-color-mode="dark"] .lambda.layout-full .secondary-navigation .navigation ul.dropdown-menu, [data-lambda-color-mode="dark"] .dropdown-menu, [data-lambda-color-mode="dark"] .moodle-dialogue-base .moodle-dialogue-wrap, [data-lambda-color-mode="dark"] .modchooser.modal-dialog .modal-body .carousel-item {
+    background-color: #16191e !important;
+}
+[data-lambda-color-mode="dark"] .modal-content .modal-header {
+    background-color: rgba(0,0,0,.25) !important;
+}
+[data-lambda-color-mode="dark"] .lambda .modal-header button.btn-close {
+    filter: invert(1);
+}
+[data-lambda-color-mode="dark"] .modal-content .modal-footer {
+    border-top: 1px solid #dee2e622;
+}
+[data-lambda-color-mode="dark"] .modal button.close, [data-lambda-color-mode="dark"] .moodle-dialogue-base .closebutton {
+    color: #fff;
+}
+[data-lambda-color-mode="dark"] .modal button.close:hover, [data-lambda-color-mode="dark"] .modal button.btn-close:hover, [data-lambda-color-mode="dark"] .moodle-dialogue-base .closebutton:hover {
+    color: $maincolor !important;
+    text-shadow: none;
+}
+[data-lambda-color-mode="dark"] .moodle-dialogue .card, [data-lambda-color-mode="dark"] .moodle-dialogue.filepicker .moodle-dialogue-bd {
+    background-color: transparent;
+    border: none;
+}
+[data-lambda-color-mode="dark"] .moodle-dialogue-base .moodle-dialogue-wrap .moodle-dialogue-hd {
+    border-bottom: 1px solid #dee2e633;
+}
+[data-lambda-color-mode="dark"] #page-admin-search .tab-pane .col-sm-3 h4 a {
+    color: $dark_mode_heading_color !important;
+}
+[data-lambda-color-mode="dark"] .path-backup .backup-section, [data-lambda-color-mode="dark"] .path-backup .mform .root_setting:nth-of-type(even), [data-lambda-color-mode="dark"] .path-backup .mform .grouped_settings:nth-of-type(even) {
+    background-color: transparent;
+}
+[data-lambda-color-mode="dark"] .path-backup .mform .root_setting:nth-of-type(odd), [data-lambda-color-mode="dark"] .path-backup .mform .grouped_settings:nth-of-type(odd) {
+    background-color: rgba(205, 255, 255, .075);
+}
+[data-lambda-color-mode="dark"] .uk-slideshow-items li:not(.overlay-full) .uk-overlay.overlay-lambda-light p {
+    background: rgba(255, 255, 255, .8);
+    color: #333 !important;
+}
+[data-lambda-color-mode="dark"] #page-my-index.pagelayout-mydashboard #page-header.header-maxwidth, [data-lambda-color-mode="dark"] #page-my-index.pagelayout-mycourses #page-header.header-maxwidth, [data-lambda-color-mode="dark"] #lambda-page-header .courseheaderimage {
+    filter: brightness(0.85);
+}
+[data-lambda-color-mode="dark"] #lambda-page-header .courseheaderimage .page-header-headings .h2 {
+    filter: brightness(1.2);
+}
+[data-lambda-color-mode="dark"] .editing .course-content li.section .activity-item:hover, [data-lambda-color-mode="dark"] .editing .course-section-header.draggable:hover {
+    background-color: #343a40 !important;
+    color: inherit !important;
+    border-color: #3584c988 !important;
+}
+[data-lambda-color-mode="dark"] .editing .activity-item:hover .description .course-description-item, [data-lambda-color-mode="dark"] .editing .activity-item:hover .activityiconcontainer, [data-lambda-color-mode="dark"] .editing .activity-item:hover .badge {
+    mix-blend-mode: normal;
+}
+[data-lambda-color-mode="dark"] .lambda-nav.style-2 .editmode-switch-form .custom-control-label::before {
+    border: 1px solid #c3c7cb33 !important;
+}
+[data-lambda-color-mode="dark"] .lambda-search-bar:focus-within #lambda-navbarsearch-form, [data-lambda-color-mode="dark"] .navbar .editmode-switch-form .custom-control-label::before {
+    background-color: rgba(205, 255, 255, .2);
+}
+[data-lambda-color-mode="dark"] .lambda.editing .course-content .divider hr, [data-lambda-color-mode="dark"] .lambda .activity-item .activity-altcontent.activity-description {
+    border-color: #dee2e655;
+}

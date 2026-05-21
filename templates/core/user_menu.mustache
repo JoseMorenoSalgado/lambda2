@@ -1,0 +1,103 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+
+    @package   theme_lambda2
+    @copyright 2025 redPIthemes
+}}
+{{!
+    @template theme_lambda2/user_menu
+}}
+
+<div class="usermenu">
+    {{#unauthenticateduser}}
+        <span class="login ps-2">
+            {{#guest}}
+                {{#str}} loggedinasguest, core {{/str}}
+                <div class="divider border-left h-75 align-self-center mx-2"></div>
+            {{/guest}}
+            {{#url}}
+                <a href="{{url}}">{{#str}} login, core {{/str}}</a>
+            {{/url}}
+        </span>
+    {{/unauthenticateduser}}
+    {{^unauthenticateduser}}
+        <div class="dropdown show">
+            <a href="#" id="user-menu-toggle" data-bs-toggle="dropdown" aria-label="{{#str}}usermenu{{/str}}"
+               aria-haspopup="true" aria-controls="user-action-menu" class="dropdown-toggle">{{{ output.theme_lambda2_get_user_fullname }}}
+                <span class="userbutton">
+                    {{> core/user_menu_metadata }}
+                </span>
+            </a>
+            <div id="user-action-menu" class="dropdown-menu dropdown-menu-right">
+                <div id="usermenu-carousel" class="carousel slide" data-touch="false" data-interval="false" data-keyboard="false">
+                    <div class="carousel-inner">
+                        <div id="carousel-item-main" class="carousel-item active" role="menu" tabindex="-1" aria-label="{{#str}}user{{/str}}">
+                            {{#lambdacolormode}}
+                                <a href="#" id="lightdarkmode-toggle" class="dropdown-item">
+                                    {{#str}}setmode{{/str}}
+                                    <span class="light-mode-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sun" viewBox="0 0 16 16"><path d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6m0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8M8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0m0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13m8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5M3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8m10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0m-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0m9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707M4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708"/></svg>
+                                    </span>
+                                    <span class="dark-mode-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-moon" viewBox="0 0 16 16"><path d="M6 .278a.77.77 0 0 1 .08.858 7.2 7.2 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277q.792-.001 1.533-.16a.79.79 0 0 1 .81.316.73.73 0 0 1-.031.893A8.35 8.35 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.75.75 0 0 1 6 .278M4.858 1.311A7.27 7.27 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.32 7.32 0 0 0 5.205-2.162q-.506.063-1.029.063c-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286"/></svg>
+                                    </span>
+                                </a>
+                            {{/lambdacolormode}}
+                            {{> core/user_action_menu_items }}
+                        </div>
+                        {{#submenus}}
+                            <div id="carousel-item-{{id}}" class="carousel-item submenu" tabindex="-1" aria-label="{{title}}">
+                                <div class="d-flex flex-column h-100">
+                                    <div class="header">
+                                        <button type="button" class="btn btn-icon carousel-navigation-link text-decoration-none text-body" data-carousel-target-id="carousel-item-main" aria-label="{{#str}}usermenugoback{{/str}}">
+                                            <span class="dir-rtl-hide">{{#pix}}i/arrow-left{{/pix}}</span>
+                                            <span class="dir-ltr-hide">{{#pix}}i/arrow-right{{/pix}}</span>
+                                        </button>
+                                        <span class="ps-2" id="carousel-item-title-{{id}}">{{title}}</span>
+                                    </div>
+                                    <div class="dropdown-divider"></div>
+                                    <div class="items h-100 overflow-auto" role="menu" aria-labelledby="carousel-item-title-{{id}}">
+                                        {{> core/user_action_menu_submenu_items }}
+                                    </div>
+                                </div>
+                            </div>
+                        {{/submenus}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/unauthenticateduser}}
+</div>
+{{#js}}
+    require(['core/usermenu'], function(UserMenu) {
+        UserMenu.init();
+    });
+    {{#lambdacolormode}}
+    require(["jquery", "core/ajax"], function($, ajax) {
+        $(document).off('click', '#lightdarkmode-toggle').on('click', '#lightdarkmode-toggle', function(e) {
+            e.preventDefault();
+            const $html = $('html');
+            const currentMode = $html.attr('data-lambda-color-mode') || 'light';
+            const newMode = (currentMode === 'dark') ? 'light' : 'dark';
+            $html.attr('data-lambda-color-mode', newMode);
+            ajax.call([{
+                methodname : "theme_lambda2_userpreference_lightdarkmode",
+                args       : {lightdarkmode : newMode}
+            }]);
+        });
+    });
+    {{/lambdacolormode}}
+{{/js}}

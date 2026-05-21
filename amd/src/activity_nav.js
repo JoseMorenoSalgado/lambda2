@@ -1,0 +1,113 @@
+define([], function() {
+    'use strict';
+    const qs = (sel, root = document) => root.querySelector(sel);
+    const qsa = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+    function getParam(name) {
+        const v = new URLSearchParams(window.location.search).get(name);
+        return v ? parseInt(v, 10) : 0;
+    }
+    function getCurrentCmid() {
+        const nav = qs('.lambda-activity-nav');
+        if (nav) {
+            const cmid = parseInt(nav.getAttribute('data-current-cmid') || '0', 10);
+            if (cmid > 0) return cmid;
+        }
+        const fromParam = getParam('id');
+        if (fromParam) return fromParam;
+        const m = (document.body.className || '').match(/(?:^|\s)cmid-(\d+)(?:\s|$)/);
+        if (m) return parseInt(m[1], 10);
+        return 0;
+    }
+    function isSectionNode(node) {
+        if (!node) return false;
+        if (node.getAttribute && node.getAttribute('data-for') === 'section_item') return true;
+        return !!node.closest('.courseindex-section-title,[data-for="section_item"]');
+    }
+    function collectIndexItems() {
+        const root = qs('#courseindex, [data-region="course-index"]');
+        if (!root) return [];
+        const itemNodes = qsa('li.courseindex-item, .courseindex-item', root);
+        const items = [];
+        for (const node of itemNodes) {
+            if (isSectionNode(node)) continue;
+            let a = qs('a.courseindex-link[href], [data-for="cm_name"] a[href]', node) || qs('a[href]', node);
+            if (!a) continue;
+            const href = a.getAttribute('href') || '';
+            if (!(/\/mod\/.+\/view\.php\?/.test(href) || /#module-\d+/.test(href))) continue;
+            let cmid = 0;
+            const m1 = href.match(/[?&]id=(\d+)/);
+            const m2 = href.match(/#module-(\d+)/);
+            if (m1) cmid = parseInt(m1[1], 10);
+            else if (m2) cmid = parseInt(m2[1], 10);
+            if (!cmid) continue;
+            const text = (a.textContent || '').trim().replace(/\s+/g, ' ');
+            items.push({ cmid, href, text, node, a });
+        }
+        const seen = new Set();
+        return items.filter(it => {
+            if (seen.has(it.cmid)) return false;
+            seen.add(it.cmid);
+            return true;
+        });
+    }
+    function applyNav(prev, next) {
+        const nav = qs('.lambda-activity-nav');
+        if (!nav) return;
+        const prevBtn = qs('.btn-prev', nav);
+        const nextBtn = qs('.btn-next', nav);
+        if (prev && prevBtn) {
+            prevBtn.href = prev.href;
+            prevBtn.textContent = '« ' + (prev.text || 'Previous');
+            prevBtn.title = prev.text || '';
+            prevBtn.classList.remove('disabled');
+            prevBtn.removeAttribute('aria-disabled');
+        }
+        if (next && nextBtn) {
+            nextBtn.href = next.href;
+            nextBtn.textContent = (next.text || 'Next') + ' »';
+            nextBtn.title = next.text || '';
+            nextBtn.classList.remove('disabled');
+            nextBtn.removeAttribute('aria-disabled');
+        }
+    }
+    function computeAndApply() {
+        const cmid = getCurrentCmid();
+        const items = collectIndexItems();
+        if (!cmid || items.length === 0) return false;
+        const idx = items.findIndex(it => it.cmid === cmid);
+        if (idx === -1) return false;
+        const prev = idx > 0 ? items[idx - 1] : null;
+        const next = idx < items.length - 1 ? items[idx + 1] : null;
+        applyNav(prev, next);
+        return true;
+    }
+    function initWithRetries(maxTries = 40, delayMs = 250) {
+        let tries = 0;
+        function tick() {
+            tries++;
+            if (computeAndApply()) return;
+            if (tries >= maxTries) return;
+            setTimeout(tick, delayMs);
+        }
+        tick();
+    }
+    function observeDrawer() {
+        const drawer = qs('#courseindex, [data-region="course-index"]');
+        if (!drawer || !('MutationObserver' in window)) return;
+        const mo = new MutationObserver(() => computeAndApply());
+        mo.observe(drawer, { childList: true, subtree: true });
+    }
+    function init() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                initWithRetries();
+                observeDrawer();
+            });
+        } else {
+            initWithRetries();
+            observeDrawer();
+        }
+        window.addEventListener('focus', () => computeAndApply());
+    }
+    return { init };
+});
