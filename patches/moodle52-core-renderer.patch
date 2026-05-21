@@ -1,0 +1,40 @@
+diff --git a/classes/output/core_renderer.php b/classes/output/core_renderer.php
+--- a/classes/output/core_renderer.php
++++ b/classes/output/core_renderer.php
+@@ -70,7 +70,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
+-					$headerloginoauth2 .= '<a class="btn login-identityprovider-btn btn-block" href="'.$idp['url']->out().'" title="'.s($idp['name']).'">';
++					$headerloginoauth2 .= '<a class="btn login-identityprovider-btn w-100" href="'.$idp['url']->out().'" title="'.s($idp['name']).'">';
+@@ -92,7 +92,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
+-		$lambdaloginform = '<form class="navbar-form pull-right" method="post" action="'.$wwwroot.'/login/index.php">
++		$lambdaloginform = '<form class="navbar-form float-end" method="post" action="'.$wwwroot.'/login/index.php">
+@@ -160,17 +160,17 @@ class core_renderer extends \theme_boost\output\core_renderer {
+-							<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
++							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+@@ -165,16 +165,16 @@ class core_renderer extends \theme_boost\output\core_renderer {
+-							<div class="login-form-username form-group">
+-								<label for="username" class="sr-only">'.get_string('username').'</label>
++							<div class="login-form-username mb-3">
++								<label for="username" class="visually-hidden">'.get_string('username').'</label>
+@@ -169,16 +169,16 @@ class core_renderer extends \theme_boost\output\core_renderer {
+-							<div class="login-form-password form-group">
+-								<label for="password" class="sr-only">'.get_string('password').'</label>
++							<div class="login-form-password mb-3">
++								<label for="password" class="visually-hidden">'.get_string('password').'</label>
+@@ -173,11 +173,11 @@ class core_renderer extends \theme_boost\output\core_renderer {
+-							<div class="login-form-submit form-group">
++							<div class="login-form-submit mb-3">
+@@ -176,7 +176,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
+-							<div class="login-form-forgotpassword form-group">'.$lambda_login_link.'</div>
++							<div class="login-form-forgotpassword mb-3">'.$lambda_login_link.'</div>
+@@ -431,7 +431,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
+-		if ($showfacebook || $showtwitter || $showwhatsapp || $showlinkedin || $showpinterest) {
++		if ($showfacebook || $showtwitterx || $showwhatsapp || $showlinkedin || $showpinterest) {
+@@ -494,14 +494,14 @@ class core_renderer extends \theme_boost\output\core_renderer {
+-				<span class="sr-only">Search courses</span>
++				<span class="visually-hidden">Search courses</span>
+@@ -498,7 +498,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
+-			<div class="input-group-append">
++			<div class="input-group-text p-0 border-0 bg-transparent">
+@@ -501,7 +501,7 @@ class core_renderer extends \theme_boost\output\core_renderer {
+-					<span class="sr-only">Search courses</span>
++					<span class="visually-hidden">Search courses</span>
