@@ -4,12 +4,12 @@
     var lambda2_admin_sections = ['#theme_lambda2_general', '#theme_lambda2_header', '#theme_lambda2_socials', '#theme_lambda2_frontpage'];
     if ($('body').hasClass('pagelayout-admin')) {
         $.each(lambda2_admin_sections, function(key, value) {
-            h3 = $(value).find('h3.main');
-            h3.each(function(key) {
-                $this = $(this);
-                $(this).addClass('lambda-toggle');
-                $(this).nextUntil('h3.main').wrapAll('<div class="admin-panel-content">');
-            })
+            const h3 = $(value).find('h3.main');
+            h3.each(function() {
+                const $this = $(this);
+                $this.addClass('lambda-toggle');
+                $this.nextUntil('h3.main').wrapAll('<div class="admin-panel-content">');
+            });
             $(value).find('h3.main').click(function(){
                 $(this).toggleClass("open");
                 $(this).next().slideToggle();
@@ -47,7 +47,7 @@
     }
 
     if ($('body').hasClass('header-style-0') || $('body').hasClass('header-style-1')) {
-        $(document).on('click', '.drawer-toggler button[data-toggler="drawers"]', function(event) {
+        $(document).on('click', '.drawer-toggler button[data-toggler="drawers"]', function() {
             $('.lambda-nav .navbar .menu').addClass('overflow-hidden');
             setTimeout(function() {
                 window.dispatchEvent(new Event('resize'));
@@ -74,7 +74,7 @@
             document.querySelectorAll('.banner-bg').forEach(function(element) {
                 element.style.backgroundImage = 'url("' + courseimage + '")';
             });
-            }
+        }
     }
 
     $(window).scroll(function() {
@@ -108,24 +108,30 @@ function check_activity_header() {
         activityHeader.classList.add("has-content");
     }
 }
-function cbinittype() {    
+function cbinittype() {
     var selectElement = document.querySelector('select[name="config_block_type"]');
     if (selectElement) {
         var selectedValue = selectElement.value;
         selectElement.form.setAttribute('data-form-type', selectedValue);
-    
+
         var colorInput = document.getElementById('favcolor');
         var textInput = document.querySelector('input[id^="id_config_block_bgcolor"]');
-        colorInput.value = textInput.value;
+        if (colorInput && textInput) {
+            colorInput.value = textInput.value;
+        }
     }
 }
 function cbchangetype(event) {
     var selectElement = event.target;
-    var selectedValue = selectElement.value;
-    selectElement.form.setAttribute('data-form-type', selectedValue);
+    if (selectElement && selectElement.form) {
+        var selectedValue = selectElement.value;
+        selectElement.form.setAttribute('data-form-type', selectedValue);
+    }
 }
 function cbchangecolor() {
     var colorInput = document.getElementById('favcolor');
     var textInput = document.querySelector('input[id^="id_config_block_bgcolor"]');
-    textInput.value = colorInput.value;
+    if (colorInput && textInput) {
+        textInput.value = colorInput.value;
+    }
 }
