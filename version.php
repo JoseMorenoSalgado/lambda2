@@ -16,11 +16,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2026052200;
-$plugin->requires  = 2026042000;
+$plugin->version   = 2026052201;
+$plugin->requires  = 2025041400;
 $plugin->component = 'theme_lambda2';
-$plugin->release   = '2.5.00-moodle52';
+$plugin->release   = '2.5.01-moodle50-52';
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->dependencies = [
-    'theme_boost' => 2026042000,
+    'theme_boost' => 2025041400,
 ];
