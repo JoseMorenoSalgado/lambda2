@@ -1,0 +1,47 @@
+name: Fix course layout main content placeholder
+
+on:
+  push:
+    paths:
+      - .github/workflows/fix-course-placeholder.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix-course-layout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Apply explicit Moodle main_content placeholder fix
+        run: |
+          set -e
+          FILE="layout/course.php"
+          perl -0pi -e 's/\$maincontent = \$OUTPUT->main_content\(\);/ob_start();\n\techo \$OUTPUT->main_content();\n\t$maincontent = ob_get_clean();/g' "$FILE"
+          grep -q 'echo \$OUTPUT->main_content();' "$FILE"
+          grep -q '\$maincontent = ob_get_clean();' "$FILE"
+
+      - name: Bump plugin version
+        run: |
+          set -e
+          FILE="version.php"
+          perl -0pi -e 's/\$plugin->version\s+=\s+\d+;/\$plugin->version   = 2026052202;/g' "$FILE"
+          perl -0pi -e "s/\$plugin->release\s+=\s+'[^']+';/\$plugin->release   = '2.5.02-moodle50-52-coursefix';/g" "$FILE"
+          grep -q '2026052202' "$FILE"
+
+      - name: Remove one-time workflow
+        run: |
+          rm -f .github/workflows/fix-course-placeholder.yml
+
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add layout/course.php version.php .github/workflows/fix-course-placeholder.yml
+          git commit -m "Fix course layout main_content placeholder for Moodle" || exit 0
+          git push
